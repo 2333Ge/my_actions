@@ -1,4 +1,4 @@
-name: Sync
+name: publish learning blog
 
 on:
   push:

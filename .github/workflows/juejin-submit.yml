@@ -5,11 +5,12 @@ on:
     - cron: "0 21 * * *"
   workflow_dispatch:
 jobs:
-  submit-send-email:
+  submit-and-send-email:
     runs-on: ubuntu-latest
     steps:
-      # uses: actions/setup-node@v3
-      # with:
-      #   node-version: '14'
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
       - run: npm install
       - run: node ./submit/juejin-actions.js ${{secrets.JUEJIN_COOKIE}} ${{secrets.QQ_EMAIL_PASS}}

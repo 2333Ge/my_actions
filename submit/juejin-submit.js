@@ -12,6 +12,14 @@ const emailInfo = {
   to: "ych.class@qq.com",
 };
 
+const formatObjToHtml = (obj) => {
+  return `<div style="background: #aaaaaa77">${JSON.stringify(
+    obj,
+    null,
+    "&nbsp;"
+  ).replace(/\n/g, "<br/>")}</div>`;
+};
+
 /**
  * 签到
  */
@@ -54,7 +62,7 @@ const sendQQEmail = async (subject, html, pass) => {
 /**
  * 签到、抽奖、发邮件
  */
-module.exports.submit = async (cookie, qqEmailPass) => {
+const submit = async (cookie, qqEmailPass) => {
   console.log("params====>", cookie, qqEmailPass);
 
   const checkInData = await checkInAPI(cookie);
@@ -70,16 +78,26 @@ module.exports.submit = async (cookie, qqEmailPass) => {
   }`;
 
   const line1 = checkInSuccess
-    ? `签到成功: 今日获得${checkInData.data.incr_point}积分\n`
+    ? `签到成功: 今日获得${checkInData.data.incr_point}积分<br/>`
     : "";
 
   const line2 = drawSuccess
-    ? `抽奖成功, 获得：${drawData.data.lottery_name}\n`
+    ? `抽奖成功, 获得：${drawData.data.lottery_name}<br/>`
     : "";
 
-  const line3 = `签到返回结果:\n ${JSON.stringify(checkInData, null, 2)}\n`;
+  const line3 = !checkInSuccess ? `签到失败：${checkInData.err_msg}<br/>` : "";
 
-  const line4 = `抽奖返回结果:\n ${JSON.stringify(drawSuccess, null, 2)}\n`;
+  const line4 = !drawSuccess ? `抽奖失败：${drawData.err_msg}<br/>` : "";
 
-  sendQQEmail(title, `${line1}${line2}${line3}${line4}`, qqEmailPass);
+  const line5 = `签到返回结果:<br/> ${formatObjToHtml(checkInData)}<br/>`;
+
+  const line6 = `抽奖返回结果:<br/> ${formatObjToHtml(drawData)}<br/>`;
+
+  sendQQEmail(
+    title,
+    `${line1}${line2}${line3}${line4}${line5}${line6}`,
+    qqEmailPass
+  );
 };
+
+module.exports.submit = submit;

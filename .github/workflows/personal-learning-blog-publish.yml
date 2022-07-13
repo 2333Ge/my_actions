@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths: [publish.md]
-
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -3,7 +3,7 @@ name: juejin submit
 on:
   schedule:
     - cron: '0 21 * * *'
-
+  workflow_dispatch:
 jobs:
   submit-send-email:
     runs-on: ubuntu-latest

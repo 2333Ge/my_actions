@@ -2,20 +2,14 @@ name: juejin submit
 
 on:
   schedule:
-    - cron: '0 21 * * *'
+    - cron: "0 21 * * *"
   workflow_dispatch:
 jobs:
   submit-send-email:
     runs-on: ubuntu-latest
     steps:
-      - name: install-dependencies
-        # uses: actions/setup-node@v3
-        # with:
-        #   node-version: '14'
-        run: | 
-          cd submit
-          npm install
-      - name: run-juejin-submit-scripts
-        run: |
-          node juejin-actions.js ${{secrets.JUEJIN_COOKIE}} ${{secrets.QQ_EMAIL_PASS}}
-      - run:  cd -
+      # uses: actions/setup-node@v3
+      # with:
+      #   node-version: '14'
+      - run: npm install
+      - run: node ./submit/juejin-actions.js ${{secrets.JUEJIN_COOKIE}} ${{secrets.QQ_EMAIL_PASS}}

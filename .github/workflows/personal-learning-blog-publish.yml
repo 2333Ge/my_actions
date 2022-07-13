@@ -3,7 +3,7 @@ name: publish learning blog
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+    paths: [publish.md]
 
 jobs:
   build:

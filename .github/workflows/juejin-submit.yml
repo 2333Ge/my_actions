@@ -8,11 +8,14 @@ jobs:
   submit-send-email:
     runs-on: ubuntu-latest
     steps:
-      - name: install
+      - name: install-dependencies
+        # uses: actions/setup-node@v3
+        # with:
+        #   node-version: '14'
         run: | 
           cd submit
           npm install
-      - name: run juejin submit
+      - name: run-juejin-submit-scripts
         run: |
           node juejin-actions.js ${{secrets.JUEJIN_COOKIE}} ${{secrets.QQ_EMAIL_PASS}}
-          cd -
+      - run:  cd -

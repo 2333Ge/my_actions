@@ -57,10 +57,10 @@ const sendQQEmail = async (subject, html, pass) => {
 module.exports.submit = async (cookie, qqEmailPass) => {
   console.log("params====>", cookie, qqEmailPass);
 
-  const checkInData = "await checkInAPI(cookie)";
+  const checkInData = await checkInAPI(cookie);
   const drawData = await drawAPI(cookie);
 
-  console.log("checkData====>", checkInData, drawData);
+  console.log("api result====>", checkInData, drawData);
 
   const checkInSuccess = checkInData.data;
   const drawSuccess = drawData.data;

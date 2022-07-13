@@ -5,8 +5,14 @@ on:
     - cron: '0 21 * * *'
 
 jobs:
-  build:
+  submit-send-email:
     runs-on: ubuntu-latest
     steps:
-      - name: juejin submit
-        
+      - name: install
+        run: | 
+          cd submit
+          npm install
+      - name: run juejin submit
+        run: |
+          node juejin-actions.js ${{secrets.JUEJIN_COOKIE}} ${{secrets.QQ_EMAIL_PASS}}
+          cd -

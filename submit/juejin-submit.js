@@ -1,16 +1,11 @@
 const axios = require("axios");
 const { sendQQEmail } = require("../utils/email");
+const { formatObjToHtml } = require("../utils/format");
 
 /**抽奖 */
 const checkInUrl = "https://api.juejin.cn/growth_api/v1/check_in";
 /**签到 */
 const drawUrl = "https://api.juejin.cn/growth_api/v1/lottery/draw";
-
-const formatObjToHtml = (obj) => {
-  return `<div style="background: #aaaaaa55">${JSON.stringify(obj, null, 2)
-    .replace(/\u0020/g, "&nbsp;")
-    .replace(/\n/g, "<br/>")}</div>`;
-};
 
 /**
  * 签到
@@ -40,8 +35,6 @@ const drawAPI = async (cookie) => {
  * 签到、抽奖、发邮件
  */
 const submit = async (cookie, qqEmailPass) => {
-  console.log("params====>", cookie, qqEmailPass);
-
   const checkInData = await checkInAPI(cookie);
   const drawData = await drawAPI(cookie);
 

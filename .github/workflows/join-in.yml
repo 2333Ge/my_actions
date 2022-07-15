@@ -8,7 +8,7 @@ jobs:
   join-in-and-send-email:
     runs-on: ubuntu-latest
     steps:
-      - uses: 2333Ge/jon-in@main
+      - uses: 2333Ge/jon-in@master
         with:
           qq-email: ${{secrets.QQ_EMAIL}}
           qq-email-pass: ${{secrets.QQ_EMAIL_PASS}}

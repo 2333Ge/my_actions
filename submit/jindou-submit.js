@@ -32,9 +32,9 @@ const submit = async (pt_key, pt_pin, qqEmailPass) => {
   let title = "京豆签到失败";
   let content = "";
   if (data) {
-    const { tomorrowSendBeans, continuousDays } = data;
+    const { tomorrowSendBeans, continuousDays, totalUserBean } = data;
     title = `京豆连续签到${continuousDays}天`;
-    content = `连续签到：${continuousDays}天， 明日送豆:${tomorrowSendBeans}<br/>`;
+    content = `连续签到：${continuousDays}天，当前总豆：${totalUserBean}，明日签到送豆:${tomorrowSendBeans}<br/>`;
   }
 
   const resultHtml = `返回结果:<br/> ${formatObjToHtml(result)}<br/>`;

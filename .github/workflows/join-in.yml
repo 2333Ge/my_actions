@@ -1,0 +1,17 @@
+name: 签到
+
+on:
+  schedule:
+    - cron: "0 21 * * *"
+  workflow_dispatch:
+jobs:
+  join-in-and-send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 2333Ge/jon-in@main
+        with:
+          qq-email: ${{secrets.QQ_EMAIL}}
+          qq-email-pass: ${{secrets.QQ_EMAIL_PASS}}
+          juejin-cookie: ${{secrets.JUEJIN_COOKIE}}
+          jd-pt-pin: ${{secrets.JD_PT_PIN}}
+          jd-pt-key: ${{secrets.JD_PT_KEY}}
